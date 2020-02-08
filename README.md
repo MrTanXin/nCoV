@@ -4,7 +4,8 @@
 
 ### Notice
 - This software will download the page once every 10 seconds
-- This is within the law in China,please check the law in your country.
+- This is within the law in China 
+- Please check the law in your country.
 
 ### Default Info Store Path
 - F:\nCov.txt
