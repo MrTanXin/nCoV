@@ -7,8 +7,6 @@ namespace nCoV
 {
     class Program
     {
-
-
         string[] old = new string[5] { "-1", "-1", "-1", "-1", "-1" };
 
         //0 --> 确诊增长
@@ -92,7 +90,7 @@ namespace nCoV
                         Array.Copy(count, old, 5);
                         using (FileHandle fh = new FileHandle())
                         {
-                            string info = Convert.ToDateTime(incr[5]).ToString("yyyy-MM-dd HH:mm") + " 确诊 " + count[0] + " 例 疑似 " + count[1] + " 例 死亡 " + count[4] + " 例 治愈 " + count[3] + " 例 重症 " + count[2] + " 例 ";
+                            string info = Convert.ToDateTime(incr[5]).ToString("yyyy-MM-dd HH:mm") + $" 确诊 {count[0]} 例 疑似 {count[1]} 例 死亡 {count[4]} 例 治愈 {count[3]} 例 重症 {count[2]} 例 ";
                             fh.WriteFile(info);
                         }
                     }
