@@ -9,7 +9,7 @@
 
 ### Default Info Store Path
 - F:\nCov.txt
-- you can change "~/nCov/FileHandle.cs" line 22 to change Store Path
+- you can change Store Path in "~/nCov/FileHandle.cs" (line 22) 
 
 ### Proxy Setting 
 - Due to chinese special network, you can choose with or not with proxy to use this project 
