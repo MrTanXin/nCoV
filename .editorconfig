@@ -1,0 +1,16 @@
+﻿[*.cs]
+
+# CA1305: 指定 IFormatProvider
+dotnet_diagnostic.CA1305.severity = none
+
+# CA1031: 不捕获常规异常类型
+dotnet_diagnostic.CA1031.severity = none
+
+# CA2234: 传递系统 URI 对象而不是字符串
+dotnet_diagnostic.CA2234.severity = none
+
+# CA2008: 不要在未传递 TaskScheduler 的情况下创建任务
+dotnet_diagnostic.CA2008.severity = none
+
+# CA2000: 丢失范围之前释放对象
+dotnet_diagnostic.CA2000.severity = none

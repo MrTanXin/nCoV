@@ -20,6 +20,7 @@ namespace nCoV
             {
                 sw.WriteLine(s + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString());
             }
+            Console.WriteLine(DateTime.Now.ToLongTimeString() + " " + "WriteInfo");
         }
     }
 }

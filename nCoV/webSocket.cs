@@ -5,6 +5,7 @@ using AngleSharp.Html.Parser;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace nCoV
 {
@@ -14,8 +15,9 @@ namespace nCoV
         {
             try
             {
-                using (HttpClient hc = new HttpClient())
+                using (HttpClient hc = new HttpClient(handler: new HttpClientHandler() { Proxy = new WebProxy() }, disposeHandler: true))
                 {
+                    
                     var htmlString = hc.GetStringAsync(url).Result;
                     HtmlParser htmlParser = new HtmlParser();
                     var data = htmlParser.ParseDocument(htmlString)
@@ -30,7 +32,7 @@ namespace nCoV
                             metra = item.TextContent;
                         }
                     }
-                    return metra != string.Empty ? metra : "?Empty Info";
+                    return metra.Length!=0 ? metra : "?Empty Info";
                 }
             }
             catch (Exception ex)
