@@ -7,6 +7,8 @@ namespace nCoV
 {
     class Program
     {
+
+
         string[] old = new string[5] { "-1", "-1", "-1", "-1", "-1" };
 
         //0 --> 确诊增长
@@ -49,6 +51,7 @@ namespace nCoV
 
         public void funct(int i)
         {
+
             if (i == 2)
             {
                 Console.WriteLine(DateTime.Now.ToString() + " " + "TimeOut Close！");
