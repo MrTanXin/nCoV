@@ -11,6 +11,11 @@ namespace nCoV
 {
     class WebSocket : IDisposable
     {
+        /// <summary>
+        /// 爬取网站中需要的信息
+        /// </summary>
+        /// <param name="url">需要被爬取的url</param>
+        /// <returns>返回网页内容</returns>
         public string PageDownload(string url)
         {
             try
@@ -41,6 +46,12 @@ namespace nCoV
             }
         }
 
+        /// <summary>
+        /// 对爬取的页面做切片取出有用的内容
+        /// </summary>
+        /// <param name="metra">源内容</param>
+        /// <param name="count">人数总计</param>
+        /// <param name="incr">新增人数</param>
         public void PageHandle(string metra,ref string[] count ,ref string[] incr)
         {
 
@@ -126,6 +137,9 @@ namespace nCoV
             return (accurateToMilliseconds ? startTime.AddMilliseconds(unixTimeStamp) : startTime.AddSeconds(unixTimeStamp)).ToLocalTime();
         }
 
+        /// <summary>
+        /// 析构
+        /// </summary>
         public void Dispose()
         {
             GC.Collect();

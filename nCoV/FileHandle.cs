@@ -13,7 +13,10 @@ namespace nCoV
         {
             GC.Collect();
         }
-
+        /// <summary>
+        /// 追加写文件
+        /// </summary>
+        /// <param name="s">内容</param>
         public void WriteFile(string s)
         {
             using (StreamWriter sw = new StreamWriter(@"F:\nCoV.txt", true))

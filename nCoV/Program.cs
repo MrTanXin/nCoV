@@ -34,7 +34,7 @@ namespace nCoV
 
             while (true)
             {
-                if ((DateTime.Now.Hour == 0) && DateTime.Now.Minute == 0 && DateTime.Now.Second <= 11)
+                if ((DateTime.Now.Hour == 0) && DateTime.Now.Minute == 0 && DateTime.Now.Second < 11)
                 {
                     using (FileHandle fh = new FileHandle())
                     {
