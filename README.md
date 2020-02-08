@@ -4,4 +4,4 @@
 
 ### Default Info Store Path
 #### F:nCov.txt
-##### you can change 
+##### you can change "~/nCov/FileHandle.cs" line 22 to change Store Path
