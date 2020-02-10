@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
+using System.IO;
 
 namespace nCoV
 {
@@ -78,9 +79,19 @@ namespace nCoV
                         lock (locker)
                         {
                             Heartbeat++;
-                            if (Heartbeat == 10)
+                            if (Heartbeat == 12)
                             {
+                                #region debug
+                                //string[] allLines = System.IO.File.ReadAllLines(@"F:\nCoV.txt");
+                                //string lastestLine = allLines[allLines.Length - 1];
+                                //Console.WriteLine(lastestLine);
+                                #endregion
+                                #region old
                                 Console.WriteLine(DateTime.Now.ToShortTimeString() + " Heartbeat Package！");
+                                #endregion
+                                #region new
+                                //Console.WriteLine(File.ReadLines(@"F:\nCoV.txt").Last());
+                                #endregion
                                 Heartbeat = 0;
                             }
                         }
