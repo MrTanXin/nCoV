@@ -8,6 +8,7 @@ namespace nCoV
 {
     class Program
     {
+        #region variable
         string[] old = new string[5] { "-1", "-1", "-1", "-1", "-1" };
 
         //0 --> 确诊增长
@@ -25,21 +26,33 @@ namespace nCoV
         //死亡 4
         string[] count = new string[5] { "0", "0", "0", "0", "0" };
 
-        int Heartbeat = 0;
+        bool IsWrite = false;
 
+        int Heartbeat = 0;
+        #endregion
+        
+        /// <summary>
+        /// Main Function
+        /// </summary>
         public static void Main()
         {
             Program program = new Program();
 
             while (true)
             {
-                if ((DateTime.Now.Hour == 0) && DateTime.Now.Minute == 0 && DateTime.Now.Second < 11)
+                if (DateTime.Now.Hour > 12 && program.IsWrite == false)
+                {
+                    program.IsWrite = true;
+                }
+
+                if (program.IsWrite && DateTime.Now.Hour < 12)
                 {
                     using (FileHandle fh = new FileHandle())
                     {
                         string info = $"昨天一日确诊增长 {program.incr[0]} 疑似增长 {program.incr[1]} 重症增长 {program.incr[2]} 死亡增长 {program.incr[3]} 治愈增长 {program.incr[4]} ";
                         fh.WriteFile(info);
                     }
+                    program.IsWrite = false;
                 }
 
                 Task.Factory.StartNew(() => { program.funct(0); });
@@ -48,14 +61,18 @@ namespace nCoV
             }
         }
 
+        /// <summary>
+        /// Function Call
+        /// </summary>
+        /// <param name="i">time Count</param>
         public void funct(int i)
         {
-
             if (i == 2)
             {
                 Console.WriteLine(DateTime.Now.ToString() + " " + "TimeOut Close！");
                 return;
             }
+
             using (WebSocket webSocket = new WebSocket())
             {
                 object locker = new object();
