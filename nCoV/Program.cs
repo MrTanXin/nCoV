@@ -9,28 +9,30 @@ namespace nCoV
     class Program
     {
         #region variable
-        string[] old = new string[5] { "-1", "-1", "-1", "-1", "-1" };
+        string[] old = new string[6] { "-1", "-1", "-1", "-1", "-1", "-1" };
 
-        //0 --> 确诊增长
+        //0 --> 累计确诊增长
         //1 --> 疑似增长
         //2 --> 重症增长
         //3 --> 死亡增长
         //4 --> 治愈增长
         //5 --> 时间
-        string[] incr = new string[6] { "0", "0", "0", "0", "0", "0" };
+        //6 --> 现存确诊增长
+        string[] incr = new string[7] { "0", "0", "0", "0", "0", "0", "0" };
 
-        //确诊 0
+        //累计确诊 0
         //疑似 1
         //重症 2
         //治愈 3
         //死亡 4
-        string[] count = new string[5] { "0", "0", "0", "0", "0" };
+        //现存确诊 5
+        string[] count = new string[6] { "0", "0", "0", "0", "0", "0" };
 
         bool IsWrite = false;
 
         int Heartbeat = 0;
         #endregion
-        
+
         /// <summary>
         /// Main Function
         /// </summary>
@@ -49,7 +51,7 @@ namespace nCoV
                 {
                     using (FileHandle fh = new FileHandle())
                     {
-                        string info = $"昨天一日确诊增长 {program.incr[0]} 疑似增长 {program.incr[1]} 重症增长 {program.incr[2]} 死亡增长 {program.incr[3]} 治愈增长 {program.incr[4]} ";
+                        string info = $"昨天一日 新增确诊增长 {program.incr[6]} 累计确诊增长 {program.incr[0]} 疑似增长 {program.incr[1]} 重症增长 {program.incr[2]} 死亡增长 {program.incr[3]} 治愈增长 {program.incr[4]} ";
                         fh.WriteFile(info);
                     }
                     program.IsWrite = false;
@@ -98,27 +100,17 @@ namespace nCoV
                             Heartbeat++;
                             if (Heartbeat == 12)
                             {
-                                #region debug
-                                //string[] allLines = System.IO.File.ReadAllLines(@"F:\nCoV.txt");
-                                //string lastestLine = allLines[allLines.Length - 1];
-                                //Console.WriteLine(lastestLine);
-                                #endregion
-                                #region old
                                 Console.WriteLine(DateTime.Now.ToShortTimeString() + " Heartbeat Package！");
-                                #endregion
-                                #region new
-                                //Console.WriteLine(File.ReadLines(@"F:\nCoV.txt").Last());
-                                #endregion
                                 Heartbeat = 0;
                             }
                         }
                     }
                     else
                     {
-                        Array.Copy(count, old, 5);
+                        Array.Copy(count, old, 6);
                         using (FileHandle fh = new FileHandle())
                         {
-                            string info = Convert.ToDateTime(incr[5]).ToString("yyyy-MM-dd HH:mm") + $" 确诊 {count[0]} 例 疑似 {count[1]} 例 死亡 {count[4]} 例 治愈 {count[3]} 例 重症 {count[2]} 例 ";
+                            string info = Convert.ToDateTime(incr[5]).ToString("yyyy-MM-dd HH:mm") + $" 现存确诊 {count[5]} 例 累计确诊 {count[0]} 例 现存疑似 {count[1]} 例 死亡 {count[4]} 例 治愈 {count[3]} 例 现存重症 {count[2]} 例 ";
                             fh.WriteFile(info);
                         }
                     }

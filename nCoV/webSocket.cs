@@ -22,7 +22,7 @@ namespace nCoV
             {
                 using (HttpClient hc = new HttpClient(handler: new HttpClientHandler() { Proxy = new WebProxy() }, disposeHandler: true))
                 {
-                    
+
                     var htmlString = hc.GetStringAsync(url).Result;
                     HtmlParser htmlParser = new HtmlParser();
                     var data = htmlParser.ParseDocument(htmlString)
@@ -37,7 +37,7 @@ namespace nCoV
                             metra = item.TextContent;
                         }
                     }
-                    return metra.Length!=0 ? metra : "?Empty Info";
+                    return metra.Length != 0 ? metra : "?Empty Info";
                 }
             }
             catch (Exception ex)
@@ -52,26 +52,25 @@ namespace nCoV
         /// <param name="metra">源内容</param>
         /// <param name="count">人数总计</param>
         /// <param name="incr">新增人数</param>
-        public void PageHandle(string metra,ref string[] count ,ref string[] incr)
+        public void PageHandle(string metra, ref string[] count, ref string[] incr)
         {
 
             string[] m = metra.Split(',', ':');
 
-
             //确诊  例 疑似  例 死亡  例 治愈  例 重症  例
-
-
 
             DateTime time = GetLocalTime(Convert.ToInt64(m[5]), true);
 
-            
+
             foreach (var item in m)
             {
+
                 //确诊 0
                 //疑似 1
                 //重症 2
                 //治愈 3
                 //死亡 4
+                //现存确诊 5
                 if (item == "\"confirmedCount\"")
                 {
                     count[0] = m[Array.IndexOf(m, item) + 1];
@@ -92,12 +91,17 @@ namespace nCoV
                 {
                     count[4] = m[Array.IndexOf(m, item) + 1];
                 }
+                if (item == "\"currentConfirmedCount\"")
+                {
+                    count[5] = m[Array.IndexOf(m, item) + 1];
+                }
 
                 //0 --> 确诊增长
                 //1 --> 疑似增长
                 //2 --> 重症增长
                 //3 --> 死亡增长
                 //4 --> 治愈增长
+                //6 --> 现存确诊增长
                 if (item == "\"confirmedIncr\"")
                 {
                     incr[0] = m[Array.IndexOf(m, item) + 1];
@@ -121,6 +125,10 @@ namespace nCoV
                 if (incr[5] != time.ToString("yyyy-MM-dd HH:mm:ss"))
                 {
                     incr[5] = time.ToString("yyyy-MM-dd HH:mm:ss");
+                }
+                if (item == "\"currentConfirmedIncr\"")
+                {
+                    incr[6] = m[Array.IndexOf(m, item) + 1];
                 }
             }
         }
