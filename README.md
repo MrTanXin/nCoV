@@ -16,3 +16,5 @@
 - this project default <B>NOT WITH PROXY</B> 
 - You can delete the parameter of "Class HttpClient" in "~/nCov/webSocket.cs" line 23  
 such as <b>using (HttpClient hc = new HttpClient())</b> to use your system proxy
+
+<b>This Project is no longer maintained</b>
